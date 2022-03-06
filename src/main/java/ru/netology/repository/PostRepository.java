@@ -4,14 +4,13 @@ import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 // Stub
 public class PostRepository {
-  private final ConcurrentSkipListMap<Long, Post> posts = new ConcurrentSkipListMap<>();
+  private final ConcurrentHashMap<Long, Post> posts = new ConcurrentHashMap<>();
   private long newId = 1L;
   public List<Post> all() {
     return new ArrayList<>(posts.values());
