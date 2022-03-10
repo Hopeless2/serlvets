@@ -1,40 +1,16 @@
 package ru.netology.repository;
 
-import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentSkipListMap;
 
-// Stub
-public class PostRepository {
-  private final ConcurrentSkipListMap<Long, Post> posts = new ConcurrentSkipListMap<>();
-  private long newId = 1L;
-  public List<Post> all() {
-    return new ArrayList<>(posts.values());
-  }
+public interface PostRepository {
+    List<Post> all();
 
-  public Optional<Post> getById(long id) {
-    return Optional.of(posts.get(id));
-  }
+    Optional<Post> getById(long id);
 
-  public Post save(Post post) {
-    if(post.getId() == 0){
-      post.setId(newId);
-      posts.putIfAbsent(newId, post);
-      newId++;
-    }else if(post.getId() < newId && post.getId() > 0){
-      posts.replace(post.getId(), post);
-    }else{
-      throw new NotFoundException("Пост не найден");
-    }
-    return post;
-  }
+    Post save(Post post);
 
-  public Optional<Post> removeById(long id) {
-    return Optional.of(posts.remove(id));
-  }
+    Optional<Post> removeById(long id);
 }
