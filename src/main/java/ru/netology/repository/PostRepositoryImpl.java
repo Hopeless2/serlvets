@@ -7,11 +7,11 @@ import ru.netology.model.Post;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class PostRepositoryImpl implements PostRepository {
-    private final ConcurrentSkipListMap<Long, Post> posts = new ConcurrentSkipListMap<>();
+    private final ConcurrentHashMap<Long, Post> posts = new ConcurrentHashMap<>();
     private long newId = 1L;
 
     public PostRepositoryImpl() {
