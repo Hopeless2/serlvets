@@ -17,13 +17,13 @@ public class PostRepository {
   }
 
   public Optional<Post> getById(long id) {
-    return Optional.of(posts.get(id));
+    return Optional.ofNullable(posts.get(id));
   }
 
   public Post save(Post post) {
     if(post.getId() == 0){
       post.setId(newId);
-      posts.putIfAbsent(newId, post);
+      posts.put(newId, post);
       newId++;
     }else if(post.getId() < newId && post.getId() > 0){
       posts.replace(post.getId(), post);
@@ -33,7 +33,7 @@ public class PostRepository {
     return post;
   }
 
-  public Optional<Post> removeById(long id) {
-    return Optional.of(posts.remove(id));
+  public void removeById(long id) {
+    Optional.ofNullable(posts.remove(id)).orElseThrow(NotFoundException::new);
   }
 }
